@@ -1,7 +1,12 @@
 /*-------------------------------
+We don`t really need to get an accurate RGB data.
+We only need a relative data to judge if the color of objects we detect is red.
   1. USE RED DETECT MODE ONLY.
   2. CHOOSE STC89C52RC AS MCU.
   3. ONLY DETECT ---> RED APPEARS.
+  
+The standard of relative data remains to be found.
+Use Rela_Dat to name it.
 ---------------------------------*/
 
 #include <reg52.h>
@@ -17,14 +22,21 @@ sbit OUT = P3^5 ;
 //Function Prototypes
 void Color_Detect_Init ( );
 void OUT_Frequency_Init ( );
-
+void Oscillator_Init ( );
 
 //Main
 void main()
 {
   //STC89C52RC doesn`t have WTD
+  OE = 1 ;
+  Color_Detect_Init ( );
+  OUT_Frequency_Init ( );
   
-
+  
+  while(1)
+  {
+    //Output Frequency has liner relation with I.
+  }
 }
 
 
@@ -43,3 +55,5 @@ void OUT_Frequency_Init ( ) { //Set standard output frequency
   //S0 = 1 ; S1 = 1 ;  //100%
 }
 
+void Oscillator_Init ( ) { //Enable Timer
+}
