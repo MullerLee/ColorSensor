@@ -1,3 +1,5 @@
+
+
 # Working with Color Sensor
 1. Structure:
       ---S0        ____________      S3---
@@ -31,3 +33,14 @@ Method1:
 Method2:
 ② 设置定时器为一固定时间(例如10 ms)，然后选通三种颜色的滤波器，计算这段时间内TCS230的输出脉冲数，计算出一个比例因子，
 通过这个比例因子可以把这些脉冲数变为255。
+(Copied from http://www.cnblogs.com/jikexianfeng/p/6344568.html)
+
+4. Some Explainations:
+当入射光投射到TCS230上时，通过光电二极管控制引脚S2、S3的不同组合，
+可以选择不同的滤波器；经过电流到频率转换器后输出不同频率的方波(占空比是50%)，
+不同的颜色和光强对应不同频率的方波；还可以通过输出定标控制引脚S0、S1，
+选择不同的输出比例因子，对输出频率范围进行调整，以适应不同的需求。
+(Copied from http://www.cnblogs.com/jikexianfeng/p/6344568.html)
+
+5.Related Programs:
+  Attemp.c
