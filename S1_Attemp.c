@@ -6,7 +6,8 @@ We only need a relative data to judge if the color of objects we detect is red.
   3. ONLY DETECT ---> RED APPEARS.
   
 The standard of relative data remains to be found.
-Use Rela_Dat to name it.
+TUse Rela_Dat to name it.
+INT0 is on P3^2
 ---------------------------------*/
 
 #include <reg52.h>
@@ -19,23 +20,34 @@ sbit S4  = P1^5 ;
 
 sbit OUT = P3^5 ;
 
+ //Global Parameters
+int count = 0;
+int time  = 0;
+
 //Function Prototypes
 void Color_Detect_Init ( );
 void OUT_Frequency_Init ( );
+void Int_Init ( );
 void Timer_Init ( );
+void Int0_Interrupt ( );
+
 
 //Main
 void main()
 {
   //STC89C52RC doesn`t have WTD
-  OE = 1 ;
+  OE = 1 ;  //CS Signal
   Color_Detect_Init ( );
   OUT_Frequency_Init ( );
+  Int_Init ( ) ;
   
-  
+  EA = 1;    //Enable Global Interrupt
+  TR0 = 1;   //Enable Timer0
+   
   while(1)
   {
     //Output Frequency has liner relation with I.
+    printf ( %d , Freq );
   }
 }
 
@@ -55,6 +67,31 @@ void OUT_Frequency_Init ( ) { //Set standard output frequency
   //S0 = 1 ; S1 = 1 ;  //100%
 }
 
-void Timer_Init ( ) { //Enable Timer
+void Int_Init ( ) { //Init Interrupt & Timer
+  EX0=1;           //Enable Interrupt 0
+  IT0=1;          //Drop Init
+}
 
+void Timer_Init ( ) {  //Timer0 init as time counter
+  TMOD = 0x01;
+  TH0 = 0x00;
+  TL0 = 0x00;
+}
+
+void Int0_Interrupt ( ) interrupt 0
+{
+  EA = 0;
+  count ++;
+  if( count == 10 ){
+   EA = 0;
+   TR0 = 0;
+   time = TH0 * 256 + TL0;
+   Freq = count / time ; 
+   count = 0;
+   TH0 = 0x00;
+   TL0 = 0x00;
+   EA = 1;
+   TR0 = 1;
+  }
+}
 }
