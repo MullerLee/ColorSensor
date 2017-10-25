@@ -22,7 +22,7 @@ sbit OUT = P3^5 ;
 //Function Prototypes
 void Color_Detect_Init ( );
 void OUT_Frequency_Init ( );
-void Oscillator_Init ( );
+void Timer_Init ( );
 
 //Main
 void main()
@@ -55,5 +55,6 @@ void OUT_Frequency_Init ( ) { //Set standard output frequency
   //S0 = 1 ; S1 = 1 ;  //100%
 }
 
-void Oscillator_Init ( ) { //Enable Timer
+void Timer_Init ( ) { //Enable Timer
+
 }
