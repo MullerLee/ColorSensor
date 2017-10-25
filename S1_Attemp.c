@@ -18,9 +18,9 @@ sbit S0  = P1^2 ;
 sbit S3  = P1^4 ;
 sbit S4  = P1^5 ;
 
-sbit OUT = P3^5 ;
+//sbit OUT = P3^2 ;
 
- //Global Parameters
+//Global Parameters
 int count = 0;
 int time  = 0;
 
@@ -31,7 +31,6 @@ void Int_Init ( );
 void Timer_Init ( );
 void Int0_Interrupt ( );
 
-
 //Main
 void main()
 {
@@ -41,8 +40,7 @@ void main()
   OUT_Frequency_Init ( );
   Int_Init ( ) ;
   
-  EA = 1;    //Enable Global Interrupt
-  TR0 = 1;   //Enable Timer0
+  EA = 1;    //Enable Global Interrupt  TR0 = 1;   //Enable Timer0
    
   while(1)
   {
@@ -93,5 +91,4 @@ void Int0_Interrupt ( ) interrupt 0
    EA = 1;
    TR0 = 1;
   }
-}
 }
