@@ -78,7 +78,6 @@ void Timer_Init ( ) {  //Timer0 init as time counter
 
 void Int0_Interrupt ( ) interrupt 0
 {
-  EA = 0;
   count ++;
   if( count == 10 ){
    EA = 0;
