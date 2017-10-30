@@ -1,16 +1,16 @@
 //The arduino version of color sensor Step_1
-# define S0 1
-# define S1 2
-# define S2 3
-# define S3 4
-# define OUT 5
+# define S0 A1
+# define S1 A2
+# define S2 A3
+# define S3 A4
+# define OUT A5
 
 int count;
 long time = 0;
 long timeold = 0,timenew = 0;
 long Freq;
 
-setup()
+void setup()
 {
   Serial.begin(9600);
   
@@ -28,7 +28,7 @@ setup()
   attachInterrupt(0,Control,FALLING);  //Interrupt Code, Function, Interrupt Mode
 }
 
-loop()
+void loop()
 {
   Serial.println(Freq);
   Serial.println('\n');
