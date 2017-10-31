@@ -5,10 +5,10 @@
 # define S3 A4
 # define OUT A5
 
-int count;
+int count=0;
 long time = 0;
 long timeold = 0,timenew = 0;
-long Freq;
+long Freq=0;
 
 void setup()
 {
@@ -21,7 +21,7 @@ void setup()
   pinMode(OUT,OUTPUT);
   
   digitalWrite(S0,0);   //0,0 PD; 1,0 2%; 0,1 20%; 1,1 100%
-  digitalWrite(S1,0);
+  digitalWrite(S1,1);
   digitalWrite(S2,1);   //ONLY RED
   digitalWrite(S3,1);
   
@@ -43,6 +43,7 @@ void Control()
     time=timenew-timeold;
     Freq=count/time;
     timeold=timenew;
+    count=0; 
+    attachInterrupt(0,Control,FALLING);
   }
-  attachInterrupt(0,Control,FALLING);
 }
